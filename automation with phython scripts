@@ -1,0 +1,18 @@
+import re
+
+input_file = "input.txt"       # The file to read from
+output_file = "emails.txt"     # The file to write to
+
+with open(input_file, "r", encoding="utf-8") as f:
+    text = f.read()
+
+email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+emails = re.findall(email_pattern, text)
+
+emails = list(set(emails))
+
+with open(output_file, "w", encoding="utf-8") as f:
+    for email in emails:
+        f.write(email + "\n")
+
+print(f"✅ Found {len(emails)} email(s). Saved to {output_file}")
